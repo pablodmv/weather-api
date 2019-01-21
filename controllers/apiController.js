@@ -1,37 +1,31 @@
 
+// Weather Model
+const Weather = require('../models/weather');
 
 exports.home = async function(req,res) {
   const request = require('request-promise');
   var options = {
-     uri: "https://api.apixu.com/v1/forecast.json?key=6ed6a33d178846eba89164920191701&q=Montevideo&days=3",
+     uri: "https://api.apixu.com/v1/forecast.json?key=6ed6a33d178846eba89164920191701&q=Montevideo&days=4",
      method: "GET",
      json: true
  }
  try {
-   console.log("Entro");
        var result = await request(options);
-       console.log("Ejecute");
-       var retorno = {
-         temp_actual: result.current.temp_c,
-         condition: result.current.condition.text,
-         forecast: [
-           {
-             fecha: result.forecast.forecastday[0].date
-
-           }
-       ]
-
-
-
-       };
-       return res.json(retorno);
+       return res.json(result);
    } catch (err) {
        console.error(err);
    }
+};
 
-  //const json_api_request = await prueba();
 
-console.log(json_api_request);
+exports.insertWeather = async (req,res) => {
+    const { name, weather } = req.body;
+    const weatherObj = new Weather({name, weather});
+    await weatherObj.save();
+    res.json({status: 'Weater Saved'});
+};
 
- //res.json("json_api_request");
+exports.getWeather = async (req,res) => {
+  const resp = await Weather.find();
+  res.json(resp);
 };

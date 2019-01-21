@@ -5,8 +5,11 @@ var apiController = require('../controllers/apiController');
 /* GET home page. */
 router.get('/', apiController.home);
 
-router.get('/weather', function(req, res, next) {
+router.get('/weatherStatus', function(req, res, next) {
   res.send({ status: 'Alive!!' });
 });
+
+router.post('/weather',apiController.insertWeather);
+router.get('/weather',apiController.getWeather);
 
 module.exports = router;
