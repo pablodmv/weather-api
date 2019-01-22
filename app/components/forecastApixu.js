@@ -56,7 +56,7 @@ class ForecastApixu extends React.Component {
               </div>
             <div className="row ">
               <div className="col-md">
-                <img className="img-fluid rounded mx-auto d-block" src={this.state.forecast.current.condition.icon} alt=""  />
+                <img className="img-fluid rounded mx-auto d-block w-100" src={this.state.forecast.current.condition.icon} alt=""  />
               </div>
             </div>
               <div className="col-auto text-center">
@@ -65,7 +65,7 @@ class ForecastApixu extends React.Component {
                 </h5>
               </div>
               <div className="col-auto text-center">
-                <h1 className="font-weight-bold">
+                <h1 className="font-weight-bold display-3">
                   {this.state.forecast.current.temp_c}°
                 </h1>
               </div>
