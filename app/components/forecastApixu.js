@@ -38,7 +38,7 @@ class ForecastApixu extends React.Component {
   getConditionsIcon(code, is_day){
     for (var i = 0; i < conditions_esp.length; i++) {
       if (conditions_esp[i].code == code) {
-        if (is_day) {
+        if (is_day ) {
           return "/images/icons/" + conditions_esp[i].icon_day;
         }
         return "/images/icons/" + conditions_esp[i].icon_night;
@@ -67,7 +67,7 @@ class ForecastApixu extends React.Component {
               </div>
             <div className="row ">
               <div className="col-md">
-                <img className="img-fluid rounded mx-auto d-block w-100" src={this.getConditionsIcon(this.state.forecast.current.condition.code)} alt=""  />
+                <img className="img-fluid rounded mx-auto d-block w-100" src={this.getConditionsIcon(this.state.forecast.current.condition.code,this.state.forecast.current.is_day)} alt=""  />
               </div>
             </div>
               <div className="col-auto text-center">
@@ -83,7 +83,7 @@ class ForecastApixu extends React.Component {
 
               <div className="col-auto text-center">
                 <h5>
-                  {this.getConditions(this.state.forecast.current.condition.code,this.state.forecast.current.condition.is_day)}
+                  {this.getConditions(this.state.forecast.current.condition.code)}
                 </h5>
               </div>
 

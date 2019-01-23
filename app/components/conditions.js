@@ -32,13 +32,14 @@ const conditions_esp = [
 		"day" : "Niebla",
 		"night" : "Niebla",
 		"icon_day" : 'fog.svg',
-		"icon_day" : 'fog.svg'
+		"icon_night" : 'fog.svg'
 	},
 	{
 		"code" : 1063,
 		"day" : "Posible lluvia",
 		"night" : "Posible lluvia",
-		"icon_day_night" : 'rainy-3.svg'
+		"icon_day" : 'rainy-3.svg',
+		"icon_night" : 'rainy-3.svg',
 	},
 	{
 		"code" : 1066,
