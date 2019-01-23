@@ -35,6 +35,17 @@ class ForecastApixu extends React.Component {
     }
   }
 
+  getConditionsIcon(code, is_day){
+    for (var i = 0; i < conditions_esp.length; i++) {
+      if (conditions_esp[i].code == code) {
+        if (is_day) {
+          return "/images/icons/" + conditions_esp[i].icon_day;
+        }
+        return "/images/icons/" + conditions_esp[i].icon_night;
+      }
+    }
+  }
+
 
 
   componentDidMount() {
@@ -50,13 +61,13 @@ class ForecastApixu extends React.Component {
     return(
       <div className="container fluid mt-5">
         <div className="row ">
-          <div className="col-md-auto rounded shadow-lg pt-4 offset-md-1" id="currentForecast">
+          <div className="col-md-auto rounded shadow-lg pt-5 offset-md-1" id="currentForecast">
               <div className="col-md-auto text-center ">
-                <h5>Hoy</h5>
+                <h5 className="text-white">Hoy</h5>
               </div>
             <div className="row ">
               <div className="col-md">
-                <img className="img-fluid rounded mx-auto d-block w-100" src={this.state.forecast.current.condition.icon} alt=""  />
+                <img className="img-fluid rounded mx-auto d-block w-100" src={this.getConditionsIcon(this.state.forecast.current.condition.code)} alt=""  />
               </div>
             </div>
               <div className="col-auto text-center">
@@ -64,14 +75,15 @@ class ForecastApixu extends React.Component {
                   {TEXT.temp}
                 </h5>
               </div>
-              <div className="col-auto text-center">
-                <h1 className="font-weight-bold display-3">
+              <div className="col-auto text-center ">
+                <h1 className="font-weight-bold display-3 ">
                   {this.state.forecast.current.temp_c}°
                 </h1>
               </div>
+
               <div className="col-auto text-center">
                 <h5>
-                  {this.getConditions(this.state.forecast.current.condition.code)}
+                  {this.getConditions(this.state.forecast.current.condition.code,this.state.forecast.current.condition.is_day)}
                 </h5>
               </div>
 
@@ -87,13 +99,13 @@ class ForecastApixu extends React.Component {
             </div>
           </div>
 
-            <div className="col-md-2 rounded shadow-lg py-5 offset-sm-1" id="nextDayForecast">
-                <div className="col-md-auto text-center ">
-                  <h5>{this.getNameDay(this.state.forecast.forecast.forecastday[1].date)}</h5>
+            <div className="col-md-2 rounded shadow-lg  my-5 offset-sm-1" id="nextDayForecast">
+                <div className="col-md-auto text-center pt-5 ">
+                  <h5 className="text-white ">{this.getNameDay(this.state.forecast.forecast.forecastday[1].date)}</h5>
                 </div>
               <div className="row ">
                 <div className="col-md">
-                  <img className="img-fluid rounded mx-auto d-block" src={this.state.forecast.forecast.forecastday[1].day.condition.icon} alt=""  />
+                  <img className="img-fluid rounded mx-auto d-block w-100" src={this.getConditionsIcon(this.state.forecast.forecast.forecastday[1].day.condition.code,1)} alt=""  />
                 </div>
               </div>
                 <div className="col-auto text-center">
@@ -103,7 +115,7 @@ class ForecastApixu extends React.Component {
                 </div>
                 <div className="col-auto text-center">
                   <h3 className="font-weight-bold">
-                    {this.state.forecast.forecast.forecastday[1].day.maxtemp_c  }°
+                    {(this.state.forecast.forecast.forecastday[1].day.maxtemp_c).toFixed() }°
                   </h3>
                 </div>
                 <div className="col-auto text-center">
@@ -119,13 +131,13 @@ class ForecastApixu extends React.Component {
               </div>
             </div>
 
-            <div className="col-md-2 rounded shadow-lg py-5 " id="dayTwo">
-                <div className="col-md-auto text-center ">
-                  <h5>{this.getNameDay(this.state.forecast.forecast.forecastday[2].date)}</h5>
+            <div className="col-md-2 rounded shadow-lg my-5 " id="dayTwo">
+                <div className="col-md-auto text-center pt-5 ">
+                  <h5 className="text-white">{this.getNameDay(this.state.forecast.forecast.forecastday[2].date)}</h5>
                 </div>
               <div className="row ">
                 <div className="col-md">
-                  <img className="img-fluid rounded mx-auto d-block" src={this.state.forecast.forecast.forecastday[2].day.condition.icon} alt=""  />
+                  <img className="img-fluid rounded mx-auto d-block w-100" src={this.getConditionsIcon(this.state.forecast.forecast.forecastday[2].day.condition.code,1)} alt=""  />
                 </div>
               </div>
                 <div className="col-auto text-center">
@@ -135,7 +147,7 @@ class ForecastApixu extends React.Component {
                 </div>
                 <div className="col-auto text-center">
                   <h3 className="font-weight-bold">
-                    {this.state.forecast.forecast.forecastday[2].day.maxtemp_c}°
+                    {(this.state.forecast.forecast.forecastday[2].day.maxtemp_c).toFixed()}°
                   </h3>
                 </div>
                 <div className="col-auto text-center">
@@ -152,13 +164,13 @@ class ForecastApixu extends React.Component {
             </div>
 
 
-            <div className="col-md-2 rounded shadow-lg py-5 " id="dayThree">
-                <div className="col-md-auto text-center ">
-                  <h5>  {this.getNameDay(this.state.forecast.forecast.forecastday[3].date)}</h5>
+            <div className="col-md-2 rounded shadow-lg my-5 " id="dayThree">
+                <div className="col-md-auto text-center  pt-5">
+                  <h5 className="text-white">  {this.getNameDay(this.state.forecast.forecast.forecastday[3].date)}</h5>
                 </div>
               <div className="row ">
                 <div className="col-md">
-                  <img className="img-fluid rounded mx-auto d-block" src={this.state.forecast.forecast.forecastday[3].day.condition.icon} alt=""  />
+                  <img className="img-fluid rounded mx-auto d-block w-100" src={this.getConditionsIcon(this.state.forecast.forecast.forecastday[3].day.condition.code,1)} alt=""  />
                 </div>
               </div>
                 <div className="col-auto text-center">
@@ -168,7 +180,7 @@ class ForecastApixu extends React.Component {
                 </div>
                 <div className="col-auto text-center">
                   <h3 className="font-weight-bold">
-                    {this.state.forecast.forecast.forecastday[3].day.maxtemp_c}°
+                    {(this.state.forecast.forecast.forecastday[3].day.maxtemp_c).toFixed()}°
                   </h3>
                 </div>
                 <div className="col-auto text-center">
