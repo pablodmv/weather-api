@@ -27,10 +27,13 @@ class ForecastApixu extends React.Component {
 
   }
 
-  getConditions(code){
+  getConditions(code,is_day){
     for (var i = 0; i < conditions_esp.length; i++) {
       if (conditions_esp[i].code == code) {
-        return conditions_esp[i].day
+        if (is_day) {
+            return conditions_esp[i].day
+        }
+        return conditions_esp[i].night
       }
     }
   }
@@ -61,6 +64,9 @@ class ForecastApixu extends React.Component {
     return(
       <div className="container fluid mt-5">
         <div className="row ">
+
+
+          {/*DESDE ACA */}
           <div className="col-md-auto rounded shadow-lg pt-5 offset-md-1" id="currentForecast">
               <div className="col-md-auto text-center ">
                 <h5 className="text-white">Hoy</h5>
@@ -70,6 +76,7 @@ class ForecastApixu extends React.Component {
                 <img className="img-fluid rounded mx-auto d-block w-100" src={this.getConditionsIcon(this.state.forecast.current.condition.code,this.state.forecast.current.is_day)} alt=""  />
               </div>
             </div>
+
               <div className="col-auto text-center">
                 <h5 className="text-center">
                   {TEXT.temp}
@@ -80,10 +87,20 @@ class ForecastApixu extends React.Component {
                   {this.state.forecast.current.temp_c}°
                 </h1>
               </div>
+              <div className="col-auto text-center">
+                <h6 className="text-center">
+                  {TEXT.txt_feelslike}
+                </h6>
+              </div>
+              <div className="col-auto text-center">
+                <h3 className="font-weight-bold">
+                  {(this.state.forecast.current.feelslike_c).toFixed()}°
+                </h3>
+              </div>
 
               <div className="col-auto text-center">
                 <h5>
-                  {this.getConditions(this.state.forecast.current.condition.code)}
+                  {this.getConditions(this.state.forecast.current.condition.code,this.state.forecast.current.is_day)}
                 </h5>
               </div>
 
@@ -98,7 +115,7 @@ class ForecastApixu extends React.Component {
               </h6>
             </div>
           </div>
-
+{/*//HASTA ACA*/}
             <div className="col-md-2 rounded shadow-lg  my-5 offset-sm-1" id="nextDayForecast">
                 <div className="col-md-auto text-center pt-5 ">
                   <h5 className="text-white ">{this.getNameDay(this.state.forecast.forecast.forecastday[1].date)}</h5>
@@ -110,17 +127,17 @@ class ForecastApixu extends React.Component {
               </div>
                 <div className="col-auto text-center">
                   <h6 className="text-center">
-                    {TEXT.txt_forecast_max}
+                    {TEXT.txt_forecast_max} / {TEXT.txt_forecast_min}
                   </h6>
                 </div>
                 <div className="col-auto text-center">
                   <h3 className="font-weight-bold">
-                    {(this.state.forecast.forecast.forecastday[1].day.maxtemp_c).toFixed() }°
+                    {(this.state.forecast.forecast.forecastday[1].day.maxtemp_c).toFixed() }° / {(this.state.forecast.forecast.forecastday[1].day.mintemp_c).toFixed() }°
                   </h3>
                 </div>
                 <div className="col-auto text-center">
                   <h6>
-                    {this.getConditions(this.state.forecast.forecast.forecastday[1].day.condition.code)}
+                    {this.getConditions(this.state.forecast.forecast.forecastday[1].day.condition.code,1)}
                   </h6>
                 </div>
 
@@ -142,17 +159,17 @@ class ForecastApixu extends React.Component {
               </div>
                 <div className="col-auto text-center">
                   <h6 className="text-center">
-                    {TEXT.txt_forecast_max}
+                    {TEXT.txt_forecast_max} / {TEXT.txt_forecast_min}
                   </h6>
                 </div>
                 <div className="col-auto text-center">
                   <h3 className="font-weight-bold">
-                    {(this.state.forecast.forecast.forecastday[2].day.maxtemp_c).toFixed()}°
+                    {(this.state.forecast.forecast.forecastday[2].day.maxtemp_c).toFixed()}° / {(this.state.forecast.forecast.forecastday[2].day.mintemp_c).toFixed()}°
                   </h3>
                 </div>
                 <div className="col-auto text-center">
                   <h6>
-                    {this.getConditions(this.state.forecast.forecast.forecastday[2].day.condition.code)}
+                    {this.getConditions(this.state.forecast.forecast.forecastday[2].day.condition.code,1)}
                   </h6>
                 </div>
 
@@ -175,17 +192,17 @@ class ForecastApixu extends React.Component {
               </div>
                 <div className="col-auto text-center">
                   <h6 className="text-center">
-                    {TEXT.txt_forecast_max}
+                    {TEXT.txt_forecast_max} / {TEXT.txt_forecast_min}
                   </h6>
                 </div>
                 <div className="col-auto text-center">
                   <h3 className="font-weight-bold">
-                    {(this.state.forecast.forecast.forecastday[3].day.maxtemp_c).toFixed()}°
+                    {(this.state.forecast.forecast.forecastday[3].day.maxtemp_c).toFixed()}° / {(this.state.forecast.forecast.forecastday[3].day.mintemp_c).toFixed()}°
                   </h3>
                 </div>
                 <div className="col-auto text-center">
                   <h6>
-                    {this.getConditions(this.state.forecast.forecast.forecastday[3].day.condition.code)}
+                    {this.getConditions(this.state.forecast.forecast.forecastday[3].day.condition.code,1)}
                   </h6>
                 </div>
 
